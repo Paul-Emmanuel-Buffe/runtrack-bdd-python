@@ -15,11 +15,14 @@ print("connexion OK !!")
 
 cursor = connection.cursor()
 
-cursor.execute("SELECT nom, capacite FROM salle")
+query = "SELECT SUM(capacite) FROM salle"
+cursor.execute(query)
 
-for i in cursor:
-    liste.append(i)
+total = cursor.fetchone()[0]
 
-print(liste)
+print(f'La capacité de toutes les salles est de {total} m2')
+
+cursor.close()
+connection.close()
 
 
